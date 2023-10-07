@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+$border_size: 4px;
+
+@mixin recent_button_mixin{
+    color: #6b7175 !important;
+    font-size: 0.9rem !important;
+}
+
+@mixin main_screen_mixin{
+    font-size: 1.7rem;
+    color: #cdd6e0;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+
+}
+
+body{
+    background-color: #494e53;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    overflow-y: hidden;
+
+    .calculator{
+        width: 278px;
+        height: 545px;
+        background: #292c30;
+        border-radius: 30px;
+        border: 1px solid #232427;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        border-bottom: 10px solid #232427;
+        box-shadow: #494e53 0px 35px 50px -15px;
+        user-select: none;
+        font-family: 'Roboto', sans-serif;
+
+        .screen_zone{
+            width: 100%;
+            height: 35%;
+            padding: 30px 20px 0px 20px;
+            .screen{
+                width: 100%;
+                height: 100%;
+                background-color: #232427;
+                border-radius: 10px;
+                font-family: 'Orbitron', sans-serif;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 10px;
+
+                .cell{
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                    color: #6b7175;
+
+                }
+
+                .transition_result{
+                    animation: transition_result_animation 0.4s ease-in-out;
+                }
+
+                .tranistion_main{
+                    animation: transition_main_animation 0.4s ease-in-out;
+                }
+
+                .main_screen{
+                    @include main_screen_mixin;
+                }
+
+                .recent{
+                    @include recent_button_mixin;
+                }
+            }
+        }
+
+
+        .button_frame{
+            flex: 1;
+            display: flex;
+            padding: 5px 15px 25px 15px;
+            .button{
+                width: 100%;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(6, 1fr);
+                gap: 5px;
+                padding: 10px;
+                grid-auto-flow: row;
+            
+
+                .button_extending{
+                    aspect-ratio: auto;
+                    grid-row: span 2;
+                }
+
+                .button_equal{
+                    background-color: #2ead6b;
+                    border-color: #2ead6b;
+
+                    &:hover{
+                        background-color: #3fbf7b;
+                        border-color: #3fbf7b;
+                    }
+                }
+
+                
+                button{
+                    all: unset;
+                    background-color: #323538;
+                    border-radius: 5px;
+                    aspect-ratio: 1/1;
+                    display: grid;
+                    place-items: center;
+                    text-align: center;
+                    font-size: 1.2rem;
+                    color: #fff;
+                    border-bottom: $border_size solid #232427;
+                    transition: all 0.2s ease-in-out;
+                    cursor: pointer;
+
+                    &:hover{
+                        border-bottom: calc(border_size - 0.5) solid #232427;
+                        transform: translateY(0.5px);
+                        background-color: #424347;
+                    }
+                
+                    &:active{
+                        border-bottom: 0px solid #232427;
+                        transform: translateY(4px);
+                        background-color: #424347;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes transition_result_animation{
+    0%{
+        transform: translateY(98%);
+        @include main_screen_mixin;
+    }
+    100%{
+        transform: translateY(0%);
+        font-size: 0.9rem;
+        @include recent_button_mixin;
+    }
+}
+
+@keyframes transition_main_animation{
+    0%{
+        transform: scale(0.3);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
